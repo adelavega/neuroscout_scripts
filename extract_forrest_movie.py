@@ -8,8 +8,7 @@ from glob import glob
 import re
 
 hertz = 2
-dataset_dir = 'C:/Users/aid338/Documents/forrest/'
-videos = [VideoStim(f) for f in glob(join(dataset_dir, 'stimuli/movie/fg_av_seg*'))]
+videos = [VideoStim(f) for f in sorted(glob('D:\neuroscout\datasets\hcp\movie_stimulus\Post_20140821_version\*'))]
 replace = False
 
 # Sampler and extractor
@@ -17,11 +16,12 @@ conv = FrameSamplingConverter(hertz=hertz)
 ext = GoogleVisionAPIFaceExtractor(discovery_file='C:/Users/aid338/Documents/forrest-1c48f2c6a8c9.json')
 
 for video in videos:
-    pattern = re.findall('seg([0-9]*)\.', video.filename)
+    pattern = re.findall('7T_MOVIE([0-9]*)_CC1_v2', video.filename)
     if pattern:
         segment = int(pattern[0])
-        out_file = (join('forrest_extract_results', 'clip{}_googleface_{}hz.csv').format(segment, hertz))
-        if  segment < 8 and (replace or (not isfile(out_file))):
+        print pattern
+        out_file = (join('hcp_extract_results', 'clip{}_googleface_{}hz.csv').format(segment, hertz))
+        if replace or (not isfile(out_file)):
             derived = conv.transform(video)
             features = [ext.transform(frame) for frame in derived]
 

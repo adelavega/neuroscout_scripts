@@ -3,10 +3,24 @@
     {
       "name": "standardize",
       "input": [
-        "incongruent_correct"
+        "maxfaceConfidence",
+        "maxfaceArea",
+        "numFaces"
       ],
     "demean": true,
     "rescale": true
-    }
+  },
+  {
+  "name": "orthogonalize",
+  "input": "maxfaceArea",
+  "wrt": ["maxfaceConfidence"],
+  "output": ["maxfaceArea"]
+},
+{
+"name": "orthogonalize",
+"input": "numFaces",
+"wrt": ["maxfaceConfidence"],
+"output": ["numFaces"]
+}
   ]
 }
