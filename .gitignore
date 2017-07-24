@@ -1,3 +1,6 @@
+*.DS_Store
+*~
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -79,11 +82,15 @@ celerybeat-schedule
 .env
 
 # virtualenv
+.venv/
 venv/
 ENV/
 
 # Spyder project settings
 .spyderproject
+
+# Ignore scratch
+scratch/
 
 # Rope project settings
 .ropeproject
